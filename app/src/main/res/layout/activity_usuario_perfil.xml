@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sesiones.UsuarioPerfil">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorVerdeClaro"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1"
+            android:background="@color/colorAzulFuerte">
+
+            <ImageView
+                android:id="@+id/imageRegresar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_toRightOf="@id/textUsuario"
+                android:src="@drawable/back_100px" />
+
+            <TextView
+                android:id="@+id/textUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="63dp"
+                android:layout_marginTop="30dp"
+                android:text="Usuario"
+                android:textColor="@color/colorBlanco"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+            <ImageView
+                android:id="@+id/imageUsuario"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="162dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/user_35px_b" />
+
+            <TextView
+                android:id="@+id/textNombreUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/imageUsuario"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="107dp"
+                android:layout_marginBottom="74dp"
+                android:text="Cristina Canseco"
+                android:textColor="@color/colorAzulFuerte"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textCorreoUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="83dp"
+                android:layout_marginBottom="35dp"
+                android:text="cristycq20@gmail.com"
+                android:textColor="@color/colorVerdeFuerte"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1.5">
+
+            <Button
+                android:id="@+id/buttonCambiarEmail"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorGrisLetra"
+                android:text="@string/cambiarEmail_UC"
+                android:textColor="@color/colorVerdeFuerte" />
+
+            <Button
+                android:id="@+id/buttonCambiarClave"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonCambiarEmail"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorGrisLetra"
+                android:text="@string/cambiarClave_UC"
+                android:textColor="@color/colorVerdeFuerte" />
+
+            <Button
+                android:id="@+id/buttonEliminarCuenta"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonCambiarClave"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorGrisLetra"
+                android:text="@string/eliminarCuenta_UC"
+                android:textColor="@color/colorVerdeFuerte" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_weight=".5">
+
+            <Button
+                android:id="@+id/buttonCerrarSesión_UC"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorNaranja"
+                android:text="@string/cerrarSesion_UC"
+                android:textColor="@color/colorGrisLetra" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
