@@ -134,7 +134,7 @@
             android:layout_weight=".5">
 
             <Button
-                android:id="@+id/buttonCerrarSesión_UC"
+                android:id="@+id/bt_cerrar_sesión_mis_bitacoras"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="7dp"
+            android:layout_height="85dp"
+            android:background="@color/colorVerdeFuerte"
+            android:orientation="horizontal"
+            ></LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/img_bitacora"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginTop="13dp"
+                android:src="@drawable/cactus" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/img_bitacora"
+                android:background="@color/colorGrisOscuro"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_nombre_bitacora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="181dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/nombreBitacora_B"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_lugar_bitacora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/ubicacion_B"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_numero_muestreos_bitacora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="45dp"
+                android:text="5 muestreos"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/tv_fecha_bitacora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="65dp"
+                android:text="13/05/2019 12:34"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

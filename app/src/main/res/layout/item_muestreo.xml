@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAzulClaro"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="7dp"
+            android:layout_height="85dp"
+            android:background="@color/colorAzulFuerte"
+            android:orientation="horizontal"></LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/img_muestreo"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/cactus" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/img_muestreo"
+                android:background="@color/colorGrisOscuro"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_nombre_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="181dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/nombreBitacora_B"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_color_etiqueta_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="25dp"
+                android:text="Color:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_color_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="186dp"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@+id/tv_color_etiqueta_muestreo"
+                android:text="@string/color_B"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_dimension_etiqueta_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="45dp"
+                android:text="Dimensión:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_dimension_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="45dp"
+                android:text="@string/dimension_B"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_ubicacion_etiqueta_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="65dp"
+                android:text="Ubicación:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_ubicacion_muestreo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="65dp"
+                android:text="@string/ubicacion_B"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

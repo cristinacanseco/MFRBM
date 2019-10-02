@@ -1,4 +1,4 @@
-package com.example.llorar;
+package com.example.llorar.Segmentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.llorar.Imagen;
+import com.example.llorar.Muestreo.Muestreo_usuario;
+import com.example.llorar.R;
 
 public class PaintView extends AppCompatActivity implements View.OnClickListener{
 
@@ -40,7 +43,7 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
             if (image != null) {
                 img = new Imagen(image);
                 iD = (Drawable) img.getImagenD();
-                //Toast.makeText(this, "H:"+ img.getAltura() + " W: "+img.getAncho(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "H:"+ img.getAltura() + " W: "+img.getAncho(), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -212,13 +215,13 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
             draw_brush_palette.setVisibility(View.GONE);
         }
         else if(view.getId() == R.id.image_draw_undo){
-           drawView.onClickUndo();
-           drawView.invalidate();
+            drawView.onClickUndo();
+            drawView.invalidate();
         }
         else if(view.getId() == R.id.image_send_drawing){
-            Intent intent = new Intent(getApplicationContext(), ProcessManager.class);
-            intent.putExtra("stack",drawView.obtenerDatos(drawView.getDrawingCache()));
-            intent.putExtra("image", img.getImagenB());
+            Intent intent = new Intent(PaintView.this, Muestreo_usuario.class);
+            intent.putExtra("stack",drawView.obtenerDatos(drawView.getCanvasBitmap()));
+            intent.putExtra("image", img.getImagenBC());
             startActivity(intent);
         }
     }

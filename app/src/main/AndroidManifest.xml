@@ -3,12 +3,11 @@
     package="com.example.llorar">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -17,12 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".Muestreo.Mis_muestreos"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Sesiones.UsuarioPerfil" />
         <activity android:name=".Sesiones.RegistroUsuario" />
         <activity android:name=".Sesiones.InicioSesion" />
-        <activity android:name=".ProcessManager" />
-        <activity android:name=".PaintView" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Muestreo.Muestreo_usuario" />
+        <activity android:name=".Segmentacion.PaintView" />
+        <activity android:name=".Bitacora.Mis_bitacoras">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.llorar;
+package com.example.llorar.Segmentacion;
 
 import android.graphics.Path;
 

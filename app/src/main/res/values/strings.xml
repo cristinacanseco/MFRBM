@@ -27,7 +27,8 @@
     <string name="eliminarCuenta_UC">Eliminar mi cuenta</string>
     <string name="cerrarSesion_UC"> Cerrar sesión </string>
     <string name="misBitacoras_B">Mis Bitácoras</string>
-    <string name="nombreBitacora_B">Muestreo 01</string>
+    <string name="nombreBitacora_B">Bitácora 01</string>
+    <string name="nombreMuestreo">Mis Muestreos</string>
     <string name="color_B">#fff</string>
     <string name="dimension_B">7 cm</string>
     <string name="ubicacion_B">12.2345, 23.7654</string>

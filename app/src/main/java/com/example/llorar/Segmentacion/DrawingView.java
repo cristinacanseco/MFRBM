@@ -1,7 +1,6 @@
-package com.example.llorar;
+package com.example.llorar.Segmentacion;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,7 +11,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+
+import com.example.llorar.R;
+import com.example.llorar.Segmentacion.BrushStroke;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,9 +30,9 @@ public class DrawingView extends View {
     private float brushSize, lastBrushSize;
     private boolean erase=false;
     private float mX, mY;
-    private  BrushStroke brush;
+    private BrushStroke brush;
 
-    private ArrayList<BrushStroke> mBrushStrokes = new ArrayList<>();
+    public ArrayList<BrushStroke> mBrushStrokes = new ArrayList<>();
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -53,6 +54,7 @@ public class DrawingView extends View {
 
         canvasPaint = new android.graphics.Paint(Paint.DITHER_FLAG);
         brush = new BrushStroke(paintColor, brushSize);
+        //touch_start(0,0);
     }
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -185,27 +187,39 @@ public class DrawingView extends View {
                 if(paintColor == s){
                     mPathPoints.add(new int[]{i, j});
                 }
-               }
+            }
         }
         return mPathPoints;
     }
 
-    public LinkedList<int[]> obtenerDatos(Bitmap drawingCache) {
+    public ArrayList<int[]> obtenerDatos(Bitmap bitmap) {
 
-        LinkedList<int[]> mPathPoints = new LinkedList<>();
-        //Agregar  punto 00,
-        for (int i=0; i< drawingCache.getWidth(); i++){
-            for(int j=0; j<drawingCache.getHeight(); j++){
-                int pix = drawingCache.getPixel(i,j);
-                int r = Color.red(pix);
-                int g = Color.green(pix);
-                int b = Color.blue(pix);
-                int s = Color.rgb(r, g, b);
-                if(paintColor == s){
-                    mPathPoints.add(new int[]{i, j});
+        ArrayList<int[]> mPathPoints = new ArrayList<>();
+
+        for (int i=0; i< bitmap.getWidth(); i++){
+            for(int j=0; j<bitmap.getHeight(); j++){
+                if(i==0 && j==0){
+                    mPathPoints.add(new int[]{0,0});
+                }else {
+                    int pix = bitmap.getPixel(i, j);
+                    int r = Color.red(pix);
+                    int g = Color.green(pix);
+                    int b = Color.blue(pix);
+                    int s = Color.rgb(r, g, b);
+                    if (paintColor == s) {
+                        mPathPoints.add(new int[]{i, j});
+                    }
                 }
             }
         }
         return mPathPoints;
+    }
+
+    public Bitmap getCanvasBitmap() {
+        return canvasBitmap;
+    }
+
+    public ArrayList getmBrush(){
+        return mBrushStrokes;
     }
 }
