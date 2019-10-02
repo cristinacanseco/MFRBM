@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.llorar.Bitacora.Mis_bitacoras;
+import com.example.llorar.MainActivity;
 import com.example.llorar.R;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Mis_muestreos extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(Mis_muestreos.this, Mis_bitacoras.class);
+        Intent intent = new Intent(Mis_muestreos.this, MainActivity.class);
         startActivity(intent);
     }
 }
