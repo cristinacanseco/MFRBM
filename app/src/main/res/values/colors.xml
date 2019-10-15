@@ -28,4 +28,13 @@
     <color name="colorAzulFuerte">#1b2c34</color>
     <color name="colorAzulClaro">#7ca4b4</color>
 
+    <color name="beige">#F5ECE7</color>
+    <color name="verde2">#A1B063</color>
+    <color name="gris1">#A89D99</color>
+    <color name="gris2">#E8EBEC</color>
+    <color name="verde1">#CACFA2</color>
+    <color name="cafe1">#8A5B4F</color>
+    <color name="verde3">#558A08</color>
+    <color name="cafe2">#543F26</color>
+
 </resources>

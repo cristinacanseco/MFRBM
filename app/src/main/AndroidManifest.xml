@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -19,16 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Muestreo.Muestreo_personalizado"></activity>
+        <activity android:name=".Sesiones.Registro"></activity>
+        <activity android:name=".Sesiones.IniciarSesion" />
+        <activity android:name=".Muestreo.Muestreo_personalizado" />
         <activity android:name=".Bitacora.Bitacora_personalizada" />
         <activity android:name=".Muestreo.Mis_muestreos" />
         <activity android:name=".Segmentacion.Camara" />
         <activity android:name=".Sesiones.UsuarioPerfil" />
-        <activity android:name=".Sesiones.RegistroUsuario" />
         <activity android:name=".Bitacora.Mis_bitacoras" />
         <activity android:name=".Muestreo.Muestreo_usuario" />
         <activity android:name=".Segmentacion.PaintView" />
-        <activity android:name=".Sesiones.InicioSesion">
+        <activity android:name=".Sesiones.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

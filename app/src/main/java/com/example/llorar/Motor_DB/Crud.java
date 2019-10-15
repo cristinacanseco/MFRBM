@@ -13,7 +13,7 @@ import com.example.llorar.Bitacora.BitacoraAdapter;
 import com.example.llorar.Bitacora.Mis_bitacoras;
 import com.example.llorar.Muestreo.Muestreo;
 import com.example.llorar.Muestreo.MuestreoAdapter;
-import com.example.llorar.Sesiones.InicioSesion;
+import com.example.llorar.Sesiones.IniciarSesion;
 import com.example.llorar.Sesiones.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -114,7 +114,7 @@ public class Crud {
 
     public void cerrarSesion(){
         mAuth.signOut();
-        context.startActivity(new Intent (context, InicioSesion.class));
+        context.startActivity(new Intent (context, IniciarSesion.class));
     }
 
 
