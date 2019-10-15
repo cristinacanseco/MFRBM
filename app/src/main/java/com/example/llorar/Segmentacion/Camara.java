@@ -1,9 +1,4 @@
-package com.example.llorar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+package com.example.llorar.Segmentacion;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,9 +11,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.llorar.Segmentacion.PaintView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.example.llorar.R;
+
+public class Camara extends AppCompatActivity implements View.OnClickListener{
 
     private static final int PERMISSION_CODE = 10;
     private static final int IMAGE_CAPTURE_CODE = 101;
@@ -29,10 +29,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camara);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        225);
+            }
 
-        tomarImagen_btn = findViewById(R.id.tomarImagen_btn);
-        tomarImagen_btn.setOnClickListener(this);
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        226);
+            }
+        } else {
+            abrirCamara();
+        }
 
     }
 
@@ -60,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            Intent intent = new Intent(MainActivity.this, PaintView.class);
+            Intent intent = new Intent(Camara.this, PaintView.class);
             intent.putExtra("image", bitmap);
                 startActivity(intent); }
     }

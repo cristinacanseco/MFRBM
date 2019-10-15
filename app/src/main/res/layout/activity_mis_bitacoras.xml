@@ -40,22 +40,20 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="327dp"
-                android:layout_marginLeft="264dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginTop="33dp"
                 android:src="@drawable/search_100px_white" />
 
             <ImageView
-                android:id="@+id/imageOpciones"
+                android:id="@+id/img_Opciones"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignLeft="@id/imageBuscar"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="379dp"
-                android:layout_marginLeft="379dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="33dp"
                 android:src="@drawable/menu_vertical_100px_white" />
 
         </RelativeLayout>
@@ -68,10 +66,12 @@
             android:layout_weight="3"
             android:background="@color/colorGrisFondos">
 
-            <ListView
-                android:id="@+id/lv_mis_bitacoras"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mis_bitacoras"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></ListView>
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"></androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
 
@@ -80,13 +80,14 @@
             android:layout_height="12dp"
             android:layout_weight=".3">
 
-            <Button
-                android:id="@+id/btn_cerrar_sesion_mis_bitacoras"
+            <ImageButton
+                android:id="@+id/btn_agregar_muestreo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/plus_black"
-                android:layout_centerHorizontal="true" />
-
+                android:layout_marginLeft="280dp"
+                android:src="@drawable/plus_100px_verde"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorGrisFondos"/>
         </RelativeLayout>
 
     </LinearLayout>

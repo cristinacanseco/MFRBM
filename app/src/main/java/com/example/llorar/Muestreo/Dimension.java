@@ -2,19 +2,19 @@ package com.example.llorar.Muestreo;
 
 public class Dimension {
 
-    public int ancho;
-    public int alto;
+    public double ancho;
+    public double alto;
 
-    public Dimension(int ancho, int alto) {
+    public Dimension(double  ancho, double  alto) {
         this.ancho = ancho;
         this.alto = alto;
     }
 
-    public int getAncho() {
+    public double getAncho() {
         return ancho;
     }
 
-    public int getAlto() {
+    public double getAlto() {
         return alto;
     }
 }

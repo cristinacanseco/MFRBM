@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="textura">
+        <item>Bla1</item>
+        <item>Bla2</item>
+        <item>Bla3</item>
+        <item>Bla4</item>
+        <item>Bla5</item>
+        <item>Bla6</item>
+    </string-array>
+
+</resources>

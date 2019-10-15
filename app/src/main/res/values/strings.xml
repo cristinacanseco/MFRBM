@@ -15,7 +15,7 @@
     <string name="formar_IS">Se parte de nosotros.</string>
     <string name="titulo_RU">Crea tu cuenta</string>
     <string name="email_RU">Email</string>
-    <string name="clave_RU">Contraseña</string>
+    <string name="clave_RU">Contraseña(6 caracteres)</string>
     <string name="confirmarClava_RU">Confirmar contraseña</string>
     <string name="nombreUsuario_RU">Nombre usuario</string>
     <string name="apellidoUsuario_RU">Apellido usuario</string>
@@ -31,5 +31,7 @@
     <string name="nombreMuestreo">Mis Muestreos</string>
     <string name="color_B">#fff</string>
     <string name="dimension_B">7 cm</string>
+    <string name="textura">Textura</string>
+    <string name="forma">Forma</string>
     <string name="ubicacion_B">12.2345, 23.7654</string>
 </resources>

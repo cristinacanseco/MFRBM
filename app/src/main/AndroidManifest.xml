@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.llorar">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -15,15 +17,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".Muestreo.Mis_muestreos"></activity>
-        <activity android:name=".MainActivity" />
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Muestreo.Muestreo_personalizado"></activity>
+        <activity android:name=".Bitacora.Bitacora_personalizada" />
+        <activity android:name=".Muestreo.Mis_muestreos" />
+        <activity android:name=".Segmentacion.Camara" />
         <activity android:name=".Sesiones.UsuarioPerfil" />
         <activity android:name=".Sesiones.RegistroUsuario" />
-        <activity android:name=".Sesiones.InicioSesion" />
+        <activity android:name=".Bitacora.Mis_bitacoras" />
         <activity android:name=".Muestreo.Muestreo_usuario" />
         <activity android:name=".Segmentacion.PaintView" />
-        <activity android:name=".Bitacora.Mis_bitacoras">
+        <activity android:name=".Sesiones.InicioSesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

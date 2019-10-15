@@ -41,11 +41,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="25dp"
-                android:layout_toStartOf="@+id/editTextCorreo"
+                android:layout_toStartOf="@+id/et_correo_is"
                 app:srcCompat="@drawable/email_35px" />
 
             <EditText
-                android:id="@+id/editTextCorreo"
+                android:id="@+id/et_correo_is"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -63,11 +63,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="180dp"
                 android:layout_marginEnd="25dp"
-                android:layout_toStartOf="@+id/editTextClave"
+                android:layout_toStartOf="@+id/ed_clave_is"
                 app:srcCompat="@drawable/password_35px" />
 
             <EditText
-                android:id="@+id/editTextClave"
+                android:id="@+id/ed_clave_is"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -79,7 +79,7 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/btnIngresar"
+                android:id="@+id/btn_ingresar_is"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_centerHorizontal="true"
@@ -111,7 +111,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_registrarse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

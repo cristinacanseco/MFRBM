@@ -1,39 +1,57 @@
 package com.example.llorar.Sesiones;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.example.llorar.Bitacora.Mis_bitacoras;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.llorar.Motor_DB.Crud;
 import com.example.llorar.R;
 
-public class InicioSesion extends AppCompatActivity {
+public class InicioSesion extends AppCompatActivity  {
 
-    public EditText editTextCorreo, editTextClave;
-    public String correo="", clave="";
-
+    public EditText et_correo_is, et_clave_is;
+    public Button btn_ingresar_is;
+    public TextView tv_registrarse;
+    public Crud crud;
+    public String correo, clave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
-        editTextClave = findViewById(R.id.editTextClave);
-        editTextCorreo = findViewById(R.id.editTextCorreo);
+        crud = new Crud(InicioSesion.this);
 
-        correo = editTextCorreo.getText().toString();
-        clave = editTextClave.getText().toString();
+        et_clave_is = findViewById(R.id.ed_clave_is);
+        et_correo_is = findViewById(R.id.et_correo_is);
+        tv_registrarse = findViewById(R.id.tv_registrarse);
+        tv_registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(InicioSesion.this, RegistroUsuario.class));
+            }
+        });
 
-        if(correo!=null || clave!=null){
-            Intent intent = new Intent(InicioSesion.this, Mis_bitacoras.class);
-            intent.putExtra("correo_usuario", correo);
-            startActivity(intent);
-        }else{
-            Toast.makeText(this, "Error, datos incompletos", Toast.LENGTH_SHORT).show();
-        }
-
+        btn_ingresar_is = findViewById(R.id.btn_ingresar_is);
+        
+        btn_ingresar_is.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                correo = et_correo_is.getText().toString().trim();
+                clave = et_clave_is.getText().toString().trim();
+                iniciarSesion();
+            }
+        });
+        
     }
+
+    private void iniciarSesion() {
+        crud.iniciarSesion(correo, clave);
+    }
+
 }

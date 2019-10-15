@@ -1,8 +1,5 @@
 package com.example.llorar.Segmentacion;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.llorar.Imagen;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.llorar.Muestreo.Muestreo_usuario;
 import com.example.llorar.R;
 
@@ -221,7 +220,7 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
         else if(view.getId() == R.id.image_send_drawing){
             Intent intent = new Intent(PaintView.this, Muestreo_usuario.class);
             intent.putExtra("stack",drawView.obtenerDatos(drawView.getCanvasBitmap()));
-            intent.putExtra("image", img.getImagenBC());
+            intent.putExtra("image", img.getImagenB());
             startActivity(intent);
         }
     }

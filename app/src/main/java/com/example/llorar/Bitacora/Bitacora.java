@@ -1,36 +1,55 @@
 package com.example.llorar.Bitacora;
 
-public class Bitacora {
+import java.io.Serializable;
 
-    public String nombre_bitacora;
-    public String lugar_bitacora;
-    public int cantidad_muestreos;
-    public String fecha_bitacora;
-    public int imagen;
+public class Bitacora implements Serializable {
 
-    public Bitacora(String nombre_bitacora, String lugar_bitacora, int cantidad_muestreos, String fecha_bitacora, int imagen) {
-        this.nombre_bitacora = nombre_bitacora;
-        this.lugar_bitacora = lugar_bitacora;
-        this.cantidad_muestreos = cantidad_muestreos;
-        this.fecha_bitacora = fecha_bitacora;
-        this.imagen = imagen;
+    public String nombre_btc;
+    public String ubicacion_btc;
+    public String cantidad_btc;
+    public String fecha_btc;
+    public String hora_btc;
+    public String imagen_btc;
+    public String id_btc;
+
+    public Bitacora(){}
+
+    public Bitacora(String nombre_btc, String ubicacion_btc, String cantidad_btc, String fecha_btc, String hora_btc, String imagen_btc) {
+        this.nombre_btc = nombre_btc;
+        this.ubicacion_btc = ubicacion_btc;
+        this.cantidad_btc = cantidad_btc;
+        this.fecha_btc = fecha_btc;
+        this.hora_btc = hora_btc;
+        this.imagen_btc = imagen_btc;
     }
 
-    public String getNombre_bitacora() {
-        return nombre_bitacora;
+    public Bitacora(String nombre_btc, String ubicacion_btc, String cantidad_btc, String fecha_btc, String hora_btc, String imagen_btc, String id_btc) {
+        this.nombre_btc = nombre_btc;
+        this.ubicacion_btc = ubicacion_btc;
+        this.cantidad_btc = cantidad_btc;
+        this.fecha_btc = fecha_btc;
+        this.hora_btc = hora_btc;
+        this.imagen_btc = imagen_btc;
+        this.id_btc = id_btc;
     }
 
-    public String getLugar_bitacora() {
-        return lugar_bitacora;
+    public String getNombre_btc() {
+        return nombre_btc;
     }
 
-    public int getCantidad_muestreos() {
-        return cantidad_muestreos;
+    public String getUbicacion_btc() {
+        return ubicacion_btc;
     }
 
-    public String getFecha_bitacora() {
-        return fecha_bitacora;
+    public String getCantidad_btc() { return cantidad_btc; }
+
+    public String getFecha_btc() {
+        return fecha_btc;
     }
 
-    public int getImagen() { return imagen; }
+    public String getImagen_btc() { return imagen_btc; }
+
+    public String getHora_btc() { return hora_btc; }
+
+    public String getId_btc() { return id_btc; }
 }

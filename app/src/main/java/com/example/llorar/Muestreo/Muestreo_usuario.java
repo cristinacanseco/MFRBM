@@ -1,16 +1,15 @@
 package com.example.llorar.Muestreo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.llorar.Segmentacion.BrushStroke;
-import com.example.llorar.Imagen;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.llorar.Segmentacion.Imagen;
 import com.example.llorar.R;
+import com.example.llorar.Segmentacion.BrushStroke;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,6 +23,7 @@ public class Muestreo_usuario extends AppCompatActivity {
     public String text = "";
     public LinkedList<int[]> mPathPoints = new LinkedList<>();
     public ArrayList<BrushStroke> mBrushStrokes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +50,8 @@ public class Muestreo_usuario extends AppCompatActivity {
 
             }
         }
-        texto = findViewById(R.id.textTonos);
-        imgMuestra = findViewById(R.id.imgMuestra);
+        texto = findViewById(R.id.tv_color_muestreo_personalizado);
+        imgMuestra = findViewById(R.id.img_muestreo_personalizado);
         imgMuestra.setImageBitmap(imagenProcesada.getImagenB());
         obtenerRGBSegementado();
     }

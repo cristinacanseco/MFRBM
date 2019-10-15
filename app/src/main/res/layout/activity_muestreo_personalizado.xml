@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Muestreo.Muestreo_usuario">
+    android:orientation="vertical"
+    tools:context=".Muestreo.Muestreo_personalizado">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -127,6 +128,7 @@
                         android:src="@drawable/dimension" />
 
                     <TextView
+                        android:id="@+id/tv_dimension_muestreo_personalizado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -158,6 +160,7 @@
                         android:src="@drawable/ubicacion" />
 
                     <TextView
+                        android:id="@+id/tv_localizacion_muestreo_personalizado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -183,20 +186,30 @@
                     android:padding="10dp">
 
                     <ImageView
-                        android:id="@+id/img_forma_muestreo_personalizado"
+                       android:id="@+id/img_textura_muestreo_personalizado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/textura" />
 
                     <TextView
+                        android:id="@+id/tv_textura_muestreo_personalizado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="44dp"
-                        android:layout_toEndOf="@id/img_forma_muestreo_personalizado"
-                        android:text="@string/dimension_B"
+                        android:layout_toEndOf="@id/img_textura_muestreo_personalizado"
+                        android:text="@string/textura"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/sp_textura_muestreo_personalizado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="250dp"></Spinner>
+
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -221,14 +234,23 @@
 
 
                     <TextView
+                        android:id="@+id/tv_forma_muestreo_personalizado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="44dp"
                         android:layout_toEndOf="@id/img_forma_muestreo_personalizado"
-                        android:text="@string/dimension_B"
+                        android:text="@string/forma"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/sp_forma_muestreo_personalizado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="250dp"></Spinner>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -245,6 +267,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
