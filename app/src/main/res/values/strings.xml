@@ -43,6 +43,10 @@
     <string name="hola">¡Hola!</string>
     <string name="si_miembro">Ya soy miembro</string>
     <string name="inicia_sesion">Inicia sesión</string>
+    <string name="nombre_btc">Nombre de la Bitácora</string>
+    <string name="descripcion_btc">Descripcion de la Bitácora</string>
+    <string name="generar">Generar</string>
+    <string name="nueva_btc">Nueva bitácora</string>
 
 
 </resources>

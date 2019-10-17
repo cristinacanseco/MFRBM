@@ -42,10 +42,10 @@ public class Muestreo_personalizado extends AppCompatActivity implements Adapter
         muestreo_personalizado =(Muestreo) getIntent().getSerializableExtra("muestreo");
 
         img_muestreo_personalizado = findViewById(R.id.img_muestreo_personalizado);
-        tv_color_muestreo_personalizado = findViewById(R.id.tv_color_muestreo_personalizado);
+        tv_color_muestreo_personalizado = findViewById(R.id.tv_color_bitacora_personalizado);
         tv_dimension_muestreo_personalizado = findViewById(R.id.tv_dimension_muestreo_personalizado);
         tv_localizacion_muestreo_personalizado = findViewById(R.id.tv_localizacion_muestreo_personalizado);
-        tv_nombre_muestreo = findViewById(R.id.tv_nombre_bitacora);
+        tv_nombre_muestreo = findViewById(R.id.tv_nombre_btr);
 
         tv_nombre_muestreo.setText(muestreo_personalizado.getNombre_mtr());
         img_muestreo_personalizado.setBackgroundResource(Integer.parseInt(muestreo_personalizado.getImagen_mtr()));

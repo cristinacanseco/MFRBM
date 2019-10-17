@@ -27,7 +27,7 @@ public class Mis_muestreos extends AppCompatActivity implements View.OnClickList
         rv_mis_muestreos = (RecyclerView) findViewById(R.id.rv_mis_muestreos);
         rv_mis_muestreos.setLayoutManager(new LinearLayoutManager(this));
         crud = new Crud(Mis_muestreos.this);
-        crud.mostrarTodosMuestreos(rv_mis_muestreos, "RpDIrFWv82IVprN0RSYq");
+        //crud.mostrarTodosMuestreos(rv_mis_muestreos, "RpDIrFWv82IVprN0RSYq");
 
         btn_nuevo_muestreo = (ImageButton) findViewById(R.id.btn_nuevo_muestreo);
         btn_nuevo_muestreo.setOnClickListener(this);

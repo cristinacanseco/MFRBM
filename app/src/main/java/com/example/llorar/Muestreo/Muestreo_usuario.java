@@ -27,7 +27,7 @@ public class Muestreo_usuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_muestreo_usuario);
+        setContentView(R.layout.activity_muestreo_personalizado);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -50,7 +50,7 @@ public class Muestreo_usuario extends AppCompatActivity {
 
             }
         }
-        texto = findViewById(R.id.tv_color_muestreo_personalizado);
+        texto = findViewById(R.id.tv_color_bitacora_personalizado);
         imgMuestra = findViewById(R.id.img_muestreo_personalizado);
         imgMuestra.setImageBitmap(imagenProcesada.getImagenB());
         obtenerRGBSegementado();

@@ -11,6 +11,7 @@ public class Bitacora implements Serializable {
     public String hora_btc;
     public String imagen_btc;
     public String id_btc;
+    public String descripcion_btc;
 
     public Bitacora(){}
 
@@ -23,14 +24,15 @@ public class Bitacora implements Serializable {
         this.imagen_btc = imagen_btc;
     }
 
-    public Bitacora(String nombre_btc, String ubicacion_btc, String cantidad_btc, String fecha_btc, String hora_btc, String imagen_btc, String id_btc) {
+
+    public Bitacora(String nombre_btc, String ubicacion_btc, String cantidad_btc, String fecha_btc, String hora_btc, String imagen_btc, String descripcion_btc) {
         this.nombre_btc = nombre_btc;
         this.ubicacion_btc = ubicacion_btc;
         this.cantidad_btc = cantidad_btc;
         this.fecha_btc = fecha_btc;
         this.hora_btc = hora_btc;
         this.imagen_btc = imagen_btc;
-        this.id_btc = id_btc;
+        this.descripcion_btc = descripcion_btc;
     }
 
     public String getNombre_btc() {
@@ -52,4 +54,6 @@ public class Bitacora implements Serializable {
     public String getHora_btc() { return hora_btc; }
 
     public String getId_btc() { return id_btc; }
+
+    public String getDescripcion_btc() { return descripcion_btc; }
 }

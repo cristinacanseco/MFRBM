@@ -3,7 +3,7 @@ package com.example.llorar.Motor_DB;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,9 +12,9 @@ import com.example.llorar.Bitacora.Bitacora;
 import com.example.llorar.Bitacora.BitacoraAdapter;
 import com.example.llorar.Bitacora.Mis_bitacoras;
 import com.example.llorar.Muestreo.Muestreo;
-import com.example.llorar.Muestreo.MuestreoAdapter;
 import com.example.llorar.Sesiones.IniciarSesion;
 import com.example.llorar.Sesiones.Usuario;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,26 +24,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.content.ContentValues.TAG;
 
 public class Crud {
 
     public Context context;
     public FirebaseAuth mAuth;
     public FirebaseFirestore mFirestore;
-    public ArrayList<Bitacora> bitacoras;
-    public ArrayList<Muestreo> muestreos;
     public String usuario_db="Usuario";
     public String bitacora_db="Bitacora";
     public String muestreo_db="Muestreo";
+    public BitacoraAdapter adapterPrueba;
+    public CollectionReference bitacoraRefC;
+    public DocumentReference bitacoraRefD;
 
     public Crud(Context context) {
         this.context = context;
@@ -122,6 +120,10 @@ public class Crud {
 
     public void insertarDatoBitacora(Bitacora bitacora){
         String id= mAuth.getCurrentUser().getUid();
+        if(bitacora.getNombre_btc().trim().isEmpty() ){
+            createAlert("Error", "Agrega un nombre a la bitácora. \nVuelve a intentarlo\n ", "OK");
+            return;
+        }
 
         mFirestore.collection(usuario_db).document(id).collection(bitacora_db).add(generarMapBitacora(bitacora))
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -133,7 +135,12 @@ public class Crud {
                             createAlert("Error", "No se agregaron los datos de la bitácora. \nVuelve a intentarlo\n ", "OK");
                         }
                     }
-                }) ;
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        createAlert("Error", "Ups...hubo un problema. \nVuelve a intentarlo\n ", "OK");
+                    }
+        });
     }
 
     public void editarDatosBitacora(Bitacora bitacora, String id_bitacora){
@@ -157,50 +164,22 @@ public class Crud {
 
     }
 
-    public void borrarBitacora(String id_bitacora){
-        String id= mAuth.getCurrentUser().getUid();
+    public void borrarBitacora(int id_bitacora){
 
-        mFirestore.collection(usuario_db).document(id).collection(bitacora_db).document(id_bitacora).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        createAlert("Éxito", "Bitácora eliminada exitosamente", "OK");
-                        context.startActivity(new Intent(new Intent(context, Mis_bitacoras.class)));
-                    }
-                })
+        adapterPrueba.getSnapshots().getSnapshot(id_bitacora).getReference().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+                public void onSuccess(Void aVoid) {
+                    createAlert("Éxito", "Bitácora eliminada exitosamente", "OK");
+                    context.startActivity(new Intent(new Intent(context, Mis_bitacoras.class)));
+                }
+            })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        createAlert("Error", "No se pudo eliminar la bitácora seleccionada. \nVuelve a intentarlo\n "+ e.getMessage().toString(), "OK");
-                        // Log.e(TAG, "Mensaje: "+ e.getMessage().toString()+ " Localización: " +e.getLocalizedMessage().toString());
+                        createAlert("Error", "\nNo se pudo eliminar la bitácora seleccionada. \nVuelve a intentarlo\n "+ e.getMessage().toString(), "OK");
                     }
-                });
-    }
-
-    public void mostrarTodasBitacoras(final RecyclerView rv_mis_bitacoras){
-        String id= mAuth.getCurrentUser().getUid();
-        bitacoras = new ArrayList<>();
-
-        CollectionReference reference = mFirestore.collection(usuario_db).document(id).collection(bitacora_db);
-        reference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots.size() == 0){
-                    createAlert("Error", "No hay datos. \nVuelve a intentarlo\n ", "OK");
-                }else {
-                    for (QueryDocumentSnapshot documentSnapshots : queryDocumentSnapshots) {
-                        bitacoras.add(documentSnapshots.toObject(Bitacora.class));
-                        Log.e(TAG, "Mensaje:");
-                    }
-                }
-            }
-        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                BitacoraAdapter bitacoraAdapter = new BitacoraAdapter(bitacoras,context);
-                rv_mis_bitacoras.setAdapter(bitacoraAdapter);
-            }
         });
+
     }
 
     private Map<String, Object> generarMapBitacora(Bitacora bitacora) {
@@ -211,102 +190,41 @@ public class Crud {
         map.put("fecha_btc", bitacora.getFecha_btc());
         map.put("hora_btc", bitacora.getHora_btc());
         map.put("imagen_btc", bitacora.getImagen_btc());
+        map.put("descripcion_btc", bitacora.getDescripcion_btc());
         return map;
     }
 
-    public String obtenerIdBitacora(){
-        String id_bitacora = "";
-        return id_bitacora;
+    public void mostrarBitacoras(final RecyclerView rv_mis_bitacoras){
+        String id= mAuth.getCurrentUser().getUid();
+        bitacoraRefC = mFirestore.collection(usuario_db).document(id).collection(bitacora_db);
+
+        Query query = bitacoraRefC.orderBy("nombre_btc");
+        FirestoreRecyclerOptions<Bitacora> options = new FirestoreRecyclerOptions.Builder<Bitacora>()
+                .setQuery(query, Bitacora.class)
+                .build();
+        adapterPrueba = new BitacoraAdapter(options);
+
+        rv_mis_bitacoras.setAdapter(adapterPrueba);
+    }
+
+    public void obtenerBitacora(RecyclerView rv_bitacora_personalizada, String id_bitacora){
+        String id= mAuth.getCurrentUser().getUid();
+
+        mFirestore.collection(usuario_db).document(id).collection(bitacora_db).document(id_bitacora).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    Toast.makeText(context, "ID: "+documentSnapshot.getId()+"\n"+documentSnapshot.getData(), Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(context, "Error.\nVuelve a intentarlo más tarde", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
     //M U E S T R E O S
-
-    public void insertarDatoMuestreo(Muestreo muestreo, String id_bitacora){
-        String id= mAuth.getCurrentUser().getUid();
-
-        mFirestore.collection(usuario_db).document(id).collection(bitacora_db).document(id_bitacora).set(generarMapMuestreo(muestreo))
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        context.startActivity(new Intent(new Intent(context, Mis_bitacoras.class)));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        createAlert("Error", "No se agregó al usuario. \nVuelve a intentarlo\n "+ e.getMessage().toString(), "OK");
-                        // Log.e(TAG, "Mensaje: "+ e.getMessage().toString()+ " Localización: " +e.getLocalizedMessage().toString());
-                    }
-                });
-    }
-
-    public void editarDatoMuestreo(Muestreo muestreo, String id_bitacora, String id_muestreo){
-        String id= mAuth.getCurrentUser().getUid();
-
-        mFirestore.collection(usuario_db).document(id).collection(bitacora_db).document(id_bitacora)
-                .collection(muestreo_db).document(id_muestreo).update(generarMapMuestreo(muestreo))
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        context.startActivity(new Intent(new Intent(context, Mis_bitacoras.class)));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        createAlert("Error", "No se agregó al usuario. \nVuelve a intentarlo\n "+ e.getMessage().toString(), "OK");
-                        // Log.e(TAG, "Mensaje: "+ e.getMessage().toString()+ " Localización: " +e.getLocalizedMessage().toString());
-                    }
-                });
-    }
-
-    public void borrarMuestreo(String id_bitacora, String id_muestreo){
-        String id= mAuth.getCurrentUser().getUid();
-
-        mFirestore.collection(usuario_db).document(id).collection(bitacora_db).document(id_bitacora).collection(muestreo_db).document(id_muestreo).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        createAlert("Éxito", "Bitácora eliminada exitosamente", "OK");
-                        context.startActivity(new Intent(new Intent(context, Mis_bitacoras.class)));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        createAlert("Error", "No se pudo eliminar la bitácora seleccionada. \nVuelve a intentarlo\n "+ e.getMessage().toString(), "OK");
-                        // Log.e(TAG, "Mensaje: "+ e.getMessage().toString()+ " Localización: " +e.getLocalizedMessage().toString());
-                    }
-                });
-
-        if(!hayMasNodos(id_bitacora)){
-            borrarBitacora(id_bitacora);
-        }
-    }
-
-    public void mostrarTodosMuestreos(final RecyclerView rv_mis_muestreos, String id_bitacora){
-        String id= mAuth.getCurrentUser().getUid();
-        muestreos = new ArrayList<>();
-
-        CollectionReference reference = mFirestore.collection(usuario_db).document(id)
-                .collection(bitacora_db).document(id_bitacora).collection(muestreo_db);
-        reference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (QueryDocumentSnapshot documentSnapshots: queryDocumentSnapshots){
-                    muestreos.add(documentSnapshots.toObject(Muestreo.class));
-                    Log.e(TAG, "Mensaje2: ");
-                }
-            }
-        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                MuestreoAdapter muestreosAdapter = new MuestreoAdapter(muestreos,context);
-                rv_mis_muestreos.setAdapter(muestreosAdapter);
-            }
-        });
-    }
 
     private Map<String, Object> generarMapMuestreo(Muestreo muestreo) {
         Map<String, Object> map = new HashMap<>();
@@ -336,8 +254,5 @@ public class Crud {
 
     public FirebaseFirestore getmFirestore() { return mFirestore; }
 
-    private boolean hayMasNodos(String id_bitacora) {
-        return true;
-    }
-
+    public BitacoraAdapter getAdapterPrueba() { return adapterPrueba; }
 }
