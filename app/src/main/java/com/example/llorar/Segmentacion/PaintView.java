@@ -2,11 +2,10 @@ package com.example.llorar.Segmentacion;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,19 +14,30 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.llorar.Muestreo.Muestreo_usuario;
 import com.example.llorar.R;
 
-public class PaintView extends AppCompatActivity implements View.OnClickListener{
+import java.io.File;
+
+public class PaintView extends AppCompatActivity implements View.OnClickListener {
 
     private DrawingView drawView;
     private ImageView currPaint, drawBtn, eraseBtn,newBtn,saveBtn, undoBtn, drawColor, image_send_drawing;
     private float smallBrush, mediumBrush, largeBrush;
-    private Drawable iD;
-    private Imagen img;
     private ConstraintLayout draw_tools;
     private View draw_color_palette,draw_brush_palette;
     private ImageButton small_brush, medium_brush, large_brush;
+    private ImageView imagen_pv;
+
+    public String rutaAbsoluta="";
+    final int COD_SELECCIONA=10;
+    final int COD_FOTO=20;
+
+    public Button botonCargar;
+    public ImageView imagen;
+
+    public File imagenFile;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +46,16 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
 
         drawView = (DrawingView) findViewById(R.id.drawing);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Bitmap image = (Bitmap) extras.get("image");
-            if (image != null) {
-                img = new Imagen(image);
-                iD = (Drawable) img.getImagenD();
-                Toast.makeText(this, "H:"+ img.getAltura() + " W: "+img.getAncho(), Toast.LENGTH_SHORT).show();
-            }
-        }
+        imagen_pv = findViewById(R.id.imagen_pv);
+
+        //Obteniendo la imagen de la cámara!!!
+        File file = new File(getIntent().getStringExtra("rutaAbsoluta"));
+        Uri imageUri = Uri.fromFile(file);
+        Toast.makeText(this, ""+imageUri, Toast.LENGTH_SHORT).show();
+        imagen_pv.setImageURI(imageUri);
 
         drawView = (DrawingView)findViewById(R.id.drawing);
-        drawView.setBackground(iD);
+        drawView.setBackground(imagen_pv.getDrawable());
 
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.draw_color_palette);
 
@@ -90,6 +98,7 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
         medium_brush = findViewById(R.id.medium_brush);
         large_brush = findViewById(R.id.large_brush);
     }
+
 
     public void paintClicked(View view){
         drawView.setBrushSize(drawView.getLastBrushSize());
@@ -191,7 +200,7 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
             newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     drawView.startNew();
-                    drawView.setBackground(iD);
+                   // drawView.setBackground(iD);
                     dialog.dismiss();
                 }
             });
@@ -218,10 +227,10 @@ public class PaintView extends AppCompatActivity implements View.OnClickListener
             drawView.invalidate();
         }
         else if(view.getId() == R.id.image_send_drawing){
-            Intent intent = new Intent(PaintView.this, Muestreo_usuario.class);
-            intent.putExtra("stack",drawView.obtenerDatos(drawView.getCanvasBitmap()));
-            intent.putExtra("image", img.getImagenB());
-            startActivity(intent);
+            //Intent intent = new Intent(PaintView.this, Muestreo_usuario.class);
+            //intent.putExtra("stack",drawView.obtenerDatos(drawView.getCanvasBitmap()));
+            //intent.putExtra("image", img.getImagenB());
+            //startActivity(intent);
         }
     }
 

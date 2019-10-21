@@ -25,12 +25,9 @@ public class BitacoraAdapter extends FirestoreRecyclerAdapter<Bitacora, Bitacora
 
     @Override
     protected void onBindViewHolder(@NonNull BitacoraHolder holder, int position, @NonNull Bitacora model) {
-        holder.tv_nombre_bitacora.setText(model.getNombre_btc());
-        holder.tv_id_bitacora.setText(model.getId_btc());
-        holder.tv_lugar_bitacora.setText(model.getUbicacion_btc());
-        holder.tv_numero_muestreos_bitacora.setText(model.getCantidad_btc());
-        holder.tv_fecha_bitacora.setText(model.getFecha_btc());
-        holder.imagen_btc.setImageResource(R.drawable.cactus);
+        holder.tv_nombre_btc.setText(model.getNombre_btc());
+        holder.tv_descripcion_btc.setText(model.getDescripcion_btc());
+        holder.iv_imagen_btc.setImageResource(R.drawable.flores1);
     }
 
 
@@ -43,19 +40,15 @@ public class BitacoraAdapter extends FirestoreRecyclerAdapter<Bitacora, Bitacora
 
 
     class BitacoraHolder extends RecyclerView.ViewHolder{
-        TextView tv_nombre_bitacora, tv_id_bitacora, tv_lugar_bitacora,
-                tv_numero_muestreos_bitacora,tv_fecha_bitacora;
-        ImageView imagen_btc;
+        TextView tv_nombre_btc, tv_descripcion_btc;
+        ImageView iv_imagen_btc;
 
 
             public BitacoraHolder(@NonNull View itemView) {
                 super(itemView);
-                tv_nombre_bitacora = itemView.findViewById(R.id.tv_nombre_btr);
-                tv_id_bitacora = itemView.findViewById(R.id.tv_id_bitacora);
-                tv_lugar_bitacora = itemView.findViewById(R.id.tv_lugar_bitacora);
-                tv_numero_muestreos_bitacora = itemView.findViewById(R.id.tv_numero_muestreos_bitacora);
-                tv_fecha_bitacora = itemView.findViewById(R.id.tv_fecha_bitacora);
-                imagen_btc = itemView.findViewById(R.id.imagen_btc);
+                tv_nombre_btc = itemView.findViewById(R.id.tv_nombre_btc);
+                tv_descripcion_btc = itemView.findViewById(R.id.tv_descripcion_btc);
+                iv_imagen_btc = itemView.findViewById(R.id.iv_imagen_btc);
 
                 itemView.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -91,6 +84,8 @@ public class BitacoraAdapter extends FirestoreRecyclerAdapter<Bitacora, Bitacora
     public void setOnItemClickListener(OnItemClickListener listener){
          this.listener = listener;
     }
+
+
 
 
 

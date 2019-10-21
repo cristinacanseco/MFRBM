@@ -15,33 +15,35 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_imagen_btc"
-            android:src="@drawable/flores1"
+            android:id="@+id/iv_imagen_mtr"
+            android:src="@drawable/flores2"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"/>
 
         <TextView
-            android:id="@+id/tv_nombre_btc"
+            android:id="@+id/tv_nombre_mtr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bold"
-            android:text="@string/nombreBitacora_B"
+            android:text="@string/nombreMuestreo"
             android:textColor="@color/cafe2"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tv_descripcion_btc"
+            android:id="@+id/tv_localizacion_mtr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="16sp"
-            android:text="Descripción de la prueba"
+            android:text="@string/ubicacion_B"
             android:fontFamily="@font/regular"
             android:textColor="@color/cafe2"
             android:layout_marginTop="10dp" />
 
+
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

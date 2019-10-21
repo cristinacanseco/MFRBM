@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bitacora.BitacoraEditar">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrisLetra"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAzulFuerte">
+
+            <EditText
+                android:id="@+id/et_nombre_bp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/nombreBitacora_B"
+                android:textColor="@color/colorBlanco"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/imageBuscar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/et_nombre_bp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="327dp"
+                android:layout_marginLeft="264dp"
+                android:layout_marginTop="33dp"
+                android:src="@drawable/search_100px_white" />
+
+            <ImageView
+                android:id="@+id/imageOpciones"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/imageBuscar"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="379dp"
+                android:layout_marginLeft="379dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/menu_vertical_100px_white" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorGrisFondos">
+
+            <EditText
+                android:id="@+id/et_nombre_bp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hola"
+                />
+
+            <Button
+                android:id="@+id/btn_actualizar_bp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/boton"
+                android:text="Actualizar"
+                android:textColor="@color/beige"
+                android:fontFamily="@font/light"/>
+
+            <ImageView
+                android:id="@+id/img_bp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="195dp"
+                android:background="@color/colorBlanco"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fecha_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar_100px" />
+
+                <TextView
+                    android:id="@+id/tv_fecha_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@id/img_fecha_bp"
+                    android:text="@string/color_B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="260dp"
+                android:background="@color/colorGrisFondos"
+                android:padding="30dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="285dp"
+                android:background="@color/colorBlanco"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_hora_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clock_100px" />
+
+                <TextView
+                    android:id="@+id/tv_hora_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@id/img_hora_bp"
+                    android:text="@string/dimension_B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:background="@color/colorGrisFondos"
+                android:padding="30dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="375dp"
+                android:background="@color/colorBlanco"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_localizacion_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ubicacion" />
+
+                <TextView
+                    android:id="@+id/tv_localizacion_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@id/img_localizacion_bp"
+                    android:text="@string/ubicacion_B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="440dp"
+                android:background="@color/colorGrisFondos"
+                android:padding="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_mis_muestreos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="465dp"
+                android:background="@color/colorBlanco"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_muestreos_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/hoja" />
+
+                <TextView
+                    android:id="@+id/tv_muestreos_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@id/img_muestreos_bp"
+                    android:text="@string/dimension_B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="530dp"
+                android:background="@color/colorGrisFondos"
+                android:padding="20dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="545dp"
+                android:background="@color/colorBlanco"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_descripcion_bp"
+                    android:layout_width="42dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/note" />
+
+                <EditText
+                    android:id="@+id/et_descripcion_bp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@id/img_descripcion_bp"
+                    android:text="@string/dimension_B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="610dp"
+                android:background="@color/colorGrisFondos"
+                android:padding="20dp" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

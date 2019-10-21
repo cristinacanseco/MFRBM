@@ -56,4 +56,6 @@ public class Bitacora implements Serializable {
     public String getId_btc() { return id_btc; }
 
     public String getDescripcion_btc() { return descripcion_btc; }
+
+
 }

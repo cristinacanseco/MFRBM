@@ -2,24 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.llorar">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/flores1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Bitacora.EditarBitacora"></activity>
+        <activity android:name=".Bitacora.BitacoraEditar"></activity>
         <activity android:name=".Bitacora.NewBitacora" />
         <activity android:name=".Bitacora.Mis_bitacoras" />
         <activity android:name=".Sesiones.Registro" />
@@ -27,17 +24,18 @@
         <activity android:name=".Muestreo.Muestreo_personalizado" />
         <activity android:name=".Bitacora.Bitacora_personalizada" />
         <activity android:name=".Muestreo.Mis_muestreos" />
-        <activity android:name=".Segmentacion.Camara" />
+        <activity android:name=".Sesiones.MainActivity" />
         <activity android:name=".Sesiones.UsuarioPerfil" />
         <activity android:name=".Muestreo.Muestreo_usuario" />
         <activity android:name=".Segmentacion.PaintView" />
-        <activity android:name=".Sesiones.MainActivity">
+        <activity android:name=".Segmentacion.Camara">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

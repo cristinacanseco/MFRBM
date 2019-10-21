@@ -1,119 +1,256 @@
 package com.example.llorar.Segmentacion;
 
-import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.llorar.R;
 
-public class Camara extends AppCompatActivity implements View.OnClickListener{
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    private static final int PERMISSION_CODE = 10;
-    private static final int IMAGE_CAPTURE_CODE = 101;
-    private Uri photoURI;
-    private ImageButton tomarImagen_btn;
-    private String mCurrentPhotoPath;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+public class Camara extends AppCompatActivity implements View.OnClickListener {
+
+    public String rutaAbsoluta="";
+    final int COD_SELECCIONA=10;
+    final int COD_FOTO=20;
+
+    public Button botonCargar;
+    public ImageView imagen;
+
+    public File imagenFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camara);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        225);
-            }
+
+        imagen= (ImageView) findViewById(R.id.imagemId);
+        botonCargar= (Button) findViewById(R.id.btnCargarImg);
 
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
-
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        226);
-            }
-        } else {
-            abrirCamara();
+        if(validaPermisos()){
+            botonCargar.setEnabled(true);
+            botonCargar.setOnClickListener(this);
+        }else{
+            botonCargar.setEnabled(false);
         }
 
     }
 
-    private void abrirCamara(){
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
+    private boolean validaPermisos() {
+
+        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
+            return true;
+        }
+
+        if((checkSelfPermission(CAMERA)==PackageManager.PERMISSION_GRANTED)&&
+                (checkSelfPermission(WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)){
+            return true;
+        }
+
+        if((shouldShowRequestPermissionRationale(CAMERA)) ||
+                (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE))){
+            cargarDialogoRecomendacion();
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+        }
+
+        return false;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case PERMISSION_CODE:{
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    abrirCamara();
-                }else{
-                    Toast.makeText(this,"Permiso denegado", Toast.LENGTH_SHORT).show();
-                }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==100){
+            if(grantResults.length==2 && grantResults[0]==PackageManager.PERMISSION_GRANTED
+                    && grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                botonCargar.setEnabled(true);
+            }else{
+                solicitarPermisosManual();
             }
         }
+    }
+
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones={"Sí","No"};
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(Camara.this);
+        alertOpciones.setTitle("¿Deseas configurar los permisos de forma manual?");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Sí")){
+                    Intent intent=new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri=Uri.fromParts("package",getPackageName(),null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Los permisos no fueron aceptados",Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        alertOpciones.show();
+    }
+
+    private void cargarDialogoRecomendacion() {
+        AlertDialog.Builder dialogo=new AlertDialog.Builder(Camara.this);
+        dialogo.setTitle("Permisos Desactivados");
+        dialogo.setMessage("Debes aceptar los permisos para el correcto funcionamiento de la App");
+
+        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+            }
+        });
+        dialogo.show();
+    }
+
+
+    private void cargarImagen() throws IOException {
+
+        /*final CharSequence[] opciones={"Tomar Foto","Cargar Imagen","Cancelar"};
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(Camara.this);
+        alertOpciones.setTitle("Seleccione una Opción");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Tomar Foto")){
+                    try {
+                        tomarFotografia();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    if (opciones[i].equals("Cargar Imagen")){
+                        Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/");
+                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_SELECCIONA);
+                    }else{
+                        dialogInterface.dismiss();
+                    }
+                }
+            }
+        });
+        alertOpciones.show();*/
+        tomarFotografia();
+
+    }
+
+    public File crearDirectorioPublico(String nombreDirectorio) {
+        //Crear directorio público en la carpeta Pictures.
+        File directorio = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), nombreDirectorio);
+
+        if (!directorio.mkdirs())
+            Log.e("" ,"Error: No se creo el directorio público");
+
+        return directorio;
+    }
+
+    private File crearFotoFile() throws IOException{
+
+        File fileImagen = crearDirectorioPublico("MFRBM");
+        //File fileImagen=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        String timeStamp="";
+        String imagenFileName="";
+
+        boolean isCreada=fileImagen.exists();
+        if(isCreada==false){
+            isCreada=fileImagen.mkdirs();
+        }
+
+        if(isCreada==true){
+            //nombreImagen=(System.currentTimeMillis()/1000)+".jpg";
+            timeStamp=new SimpleDateFormat("yyyyMMdd HHmmss").format(new Date());
+            imagenFileName ="imagen_muestreo_"+timeStamp;
+        }
+
+        File fotoFile=File.createTempFile(imagenFileName,".jpg",fileImagen);
+
+        rutaAbsoluta=fotoFile.getAbsolutePath();
+
+        return fotoFile;
+    }
+
+
+    private void tomarFotografia() throws IOException {
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
+        imagenFile= crearFotoFile();
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagenFile));
+        startActivityForResult(intent,COD_FOTO);
+        Toast.makeText(this, ""+rutaAbsoluta, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            Intent intent = new Intent(Camara.this, PaintView.class);
-            intent.putExtra("image", bitmap);
-                startActivity(intent); }
-    }
+        if (resultCode==RESULT_OK){
 
+            switch (requestCode){
+                case COD_SELECCIONA:
+                    Uri miPath=data.getData();
+                    imagen.setImageURI(miPath);
+                    break;
+
+                case COD_FOTO:
+                    MediaScannerConnection.scanFile(this, new String[]{rutaAbsoluta}, null,
+                            new MediaScannerConnection.OnScanCompletedListener() {
+                                @Override
+                                public void onScanCompleted(String path, Uri uri) {
+                                    Log.i("Ruta de almacenamiento","Path: "+path);
+                                }
+                            });
+
+                    Intent intent = new Intent(Camara.this, PaintView.class);
+                    intent.putExtra("rutaAbsoluta", rutaAbsoluta);
+                    startActivity(intent);
+                    //Bitmap bitmap= BitmapFactory.decodeFile(rutaAbsoluta);
+                    //imagen.setImageBitmap(bitmap);
+
+                    break;
+            }
+
+
+        }
+    }
 
     @Override
     public void onClick(View view) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        225);
-            }
-
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
-
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        226);
-            }
-        } else {
-            abrirCamara();
+        try {
+            tomarFotografia();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

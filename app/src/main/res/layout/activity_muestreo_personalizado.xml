@@ -81,7 +81,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/flor" />
+                    android:src="@drawable/flores1" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
